@@ -112,5 +112,12 @@ U podesavanju projekta, moguce se kreirati pravila vezana za PR, kao sto je na p
 
 
 # Projekat
+Da bi pokrenuli projekat, u terminalu treba da pozovemo komandu `npm start` ili da otvorimo `package.json` fajl i da stisnemo na tekst `start` koji se nalazi unutar `scripts` objekta. Kada pritisnemo na `start`, otvorice nam se mali popup sa opcijom `Run Script`
 
 ## package.json
+
+## package-lock.json
+
+## node_modules
+
+## TypeScript
