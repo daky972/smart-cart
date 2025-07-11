@@ -2,14 +2,20 @@
   "name": "smart-cart",
   "version": "1.0.0",
   "description": "Shopping Smart Cart",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "node ."
+    "start": "npm run build && node .",
+    "build": "npx tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3"
   }
 }

@@ -1,5 +1,5 @@
-const path = require('node:path');
-const express = require('express');
+import path from 'node:path';
+import express from 'express';
 
 // Keriramo Express aplikaciju
 const app = express();
@@ -37,7 +37,7 @@ app.use(express.static('public'));
  * 
  */
 app.get("/", (request, response, next) => {
-  response.sendFile(path.join(__dirname, "public", "index.html"));
+  response.sendFile(path.join(__dirname, '..', "public", "pages", "index.html"));
 });
 
 /**
@@ -47,5 +47,4 @@ app.get("/", (request, response, next) => {
  */
 app.listen(3000, () => {
   console.log('Application is running...')
-}
-);
+});
