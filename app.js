@@ -11,6 +11,15 @@ const app = express();
 // const cors = require('cors');
 // app.use(cors());
 
+/**
+ * app.use je middleware, odnosno svaki poslati zahtev poslat serveru ce proci kroz sve middlewares (od gore ka dole)
+ * Middlewares se koristi za proveru zahteva, prosirenje zahteva, validaciju da li je korisnik ulogovan i slicno
+ * 
+ * express.static je Express funkcija koja za parametar prima putanju ka fajlu ili direktorijumu koji ce da servira kao
+ * statican kontent. To znaci da svi fajlovi i dorektorijumi u `public` direktorijumu ce biti dostupni korisniku.
+ * To znaci da fajlu public/index.html mozemo pristupiti preko http://localhost:3000/index.html
+ */
+app.use(express.static('public'));
 
 /**
  * app.get predstavlja GET HTTP metod, gde prvi parametar predstavlja URL, u ovom slucaju to je "/" (URL root), dok drugi
