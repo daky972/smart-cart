@@ -72,17 +72,17 @@ Kada zelis da preuzmes izmene sa `remote` repozitorijuma, koristis `pull` komand
   - `pull` komanda kaze da zelis da sinhronizujes `remote` branch sa lokalnim tako sto ces povuci sve izmene kod sebe lokalno
 
 ### Dodatne komande
-1. `git stash`
-2. `git stash pop`
-3. `git stash list`
-4. `git stash pop stash@{<hash>}`
-5. `git stash drop`
-6. `git checkout -b`
-7. `git commit --amend`
-8. `git add ./file-name`
-9. `git restore --staged <ime_fajla>`
-10. `git merge`
-
+  - `git stash`
+  - `git stash pop`
+  - `git stash list`
+  - `git stash pop stash@{<hash>}`
+  - `git stash drop`
+  - `git checkout -b`
+  - `git commit --amend`
+  - `git add ./file-name`
+  - `git restore --staged <ime_fajla>`
+  - `git merge`
+  - `git diff`
 
 # GitHub
 
@@ -112,12 +112,24 @@ U podesavanju projekta, moguce se kreirati pravila vezana za PR, kao sto je na p
 
 
 # Projekat
+
 Da bi pokrenuli projekat, u terminalu treba da pozovemo komandu `npm start` ili da otvorimo `package.json` fajl i da stisnemo na tekst `start` koji se nalazi unutar `scripts` objekta. Kada pritisnemo na `start`, otvorice nam se mali popup sa opcijom `Run Script`
 
+
 ## package.json
+Package.json fajl je od velikog znajaca i bez njega ne postoji Node.js projekat.
+U ovom fajlu postoje obavezni propertiji kao sto su `name`, `licence`, `version` i `main`.
+Znacenje propertija:
+  - `main` - Putanja do glavnog (entry) fajla. U ovom fajlu se pokrece aplikacija
+  - `version` - Verzija projekta koja se povecava u zavisnosti koje vrste izmena smo imali
+  - `scripts` - Skripte (komande) koje pozivamo da bi izvrsili neku akciju. Predstavljaju precicu za neke slozenije komande i pokrecu se komandom `npm run [ime_skripte]` (`npm run start`). Neke komande mogu da se pozovu i bez `run` kao sto su `npm start`, `npm build`, `npm test`
+  - `dependencies` - Biblioteke koje su neophodne za rad nase aplikacije
+  - `devDependencies` - Biblioteke koje se koriste samo prilikom pisanja aplikacije, ali kada se aplikacija pokrene, ne zavisi od njih
+
 
 ## package-lock.json
 
 ## node_modules
 
 ## TypeScript
+
