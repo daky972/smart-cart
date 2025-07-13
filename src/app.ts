@@ -1,12 +1,18 @@
 import path from 'node:path';
-import express from 'express';
+import express, { Request, Response } from 'express';
+import productRoutes from './controllers/products-controller';
+
+/**
+ * Express GitHub
+ * https://github.com/expressjs/express
+ */
 
 // Keriramo Express aplikaciju
 const app = express();
 
 /**
  * CORS se koristi kada drugi domen (aplikacija) zeli da komunicira sa nama
- * CORS cemo koristiti kada budemo koreirali React aplikaciju, jer ce ona imati svoj domain na drugom portu
+ * CORS cemo koristiti kada budemo kreirali React aplikaciju, jer ce ona imati svoj domain na drugom portu
  */
 // const cors = require('cors');
 // app.use(cors());
@@ -21,6 +27,22 @@ const app = express();
  */
 app.use(express.static('public'));
 
+/**
+ * Custom middleware koji ce se pozivati pre svakog zahteva poslatom ka nasem serveru
+ * Redosled middleware-a je jako bitan jer se izvrsava od gore ka dole. To znaci da jedan middleware moze da "spremi" request, a
+ * da ga drugi middleware onda obradi
+ * 
+ * Svaki middleware ima tri parametra, `request`, `response`, i `next`
+ * request - zahtev koji server dobija od korisnika
+ * response - odgovor koji ce server poslati korisniku
+ * next - obavezno treba pozvati funkciju `next()` kako bi Express pozvao sledeci middleware ili nas API handler. Ako funkciji
+ * prosledimo `undefined` ili `null`, smatra se kao da smo je pozvali bez argumenta, ali ako funkciju pozovemo sa nekom drugom
+ * vrednoscu (uglavnom objekat instance Error), onda se poziva poseban Error middleware, koji se uvek definise na kraj fajla
+ */
+app.use((request, response, next) => {
+  console.log('Main controller');
+  next();
+});
 /**
  * app.get predstavlja GET HTTP metod, gde prvi parametar predstavlja URL, u ovom slucaju to je "/" (URL root), dok drugi
  * parametar predstavlja callback, odnosno funkcija koja ce se izvrsiti kada se taj URL pogodi
@@ -39,6 +61,16 @@ app.use(express.static('public'));
 app.get("/", (request, response, next) => {
   response.sendFile(path.join(__dirname, '..', "public", "pages", "index.html"));
 });
+
+app.use('/products', productRoutes);
+
+/**
+ * Globalni Error handler koji kao prvi parameter prima Error (error-first pattern)
+ */
+app.use((error: Error, request: Request, response: Response, next: Function) => {
+  console.error(error.stack)
+  response.status(500).send('Internal Server Error!')
+})
 
 /**
  * Kazemo da se nasa Express aplikacija nalazi portu 3000, a postoje pokrecemo lokalno, onda se aplikaciji
